@@ -1,3 +1,4 @@
+#Finds the most frequent k-mer
 def FrequentWords(Text, k):
     words = []
     freq = FrequencyMap(Text, k)
