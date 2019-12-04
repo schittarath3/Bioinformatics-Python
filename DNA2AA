@@ -1,3 +1,4 @@
+#Converts DNA to AA based on the largest amino acid window. Only for DNA sequences with length divisible by 3
 def translation(genome): #translate rna to amino acid
     rnaseq = transcription(genome)
     minstart = min(startpos(genome))
