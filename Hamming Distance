@@ -1,3 +1,4 @@
+#Finds a pattern that appears in a genome with at most d mismatches
 def HammingDistance(p, q):
     count = 0
     n = len(p)
