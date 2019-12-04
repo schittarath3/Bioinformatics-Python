@@ -1,3 +1,4 @@
+#Sliding window that counts the number of a nucleotide around a circular plasmid genome.
 def SymbolArray(Genome, symbol):
     array = {}
     l = len(Genome)
