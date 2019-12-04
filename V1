@@ -1,0 +1,72 @@
+def translation(genome): #translate rna to amino acid
+    rnaseq = transcription(genome)
+    minstart = min(startpos(genome))
+    maxstop  = max(stoppos(genome))
+    aaseq    = ""
+    for z in range(minstart, maxstop+3, 3):
+        for i in aaconvert:
+            for x in range(len(aaconvert[i])):
+                if rnaseq[z:z+3] == aaconvert[i][x]:
+                    aaseq += i
+    return aaseq
+    
+def transcription(genome): #transcribes dna to rna
+    rnaseq = ""
+    for i in genome:
+        if i == "A":
+            rnaseq += "A"
+        elif i == "T":
+             rnaseq += "U"
+        elif i == "G":
+             rnaseq += "G"
+        elif i == "C":
+             rnaseq += "C"
+    return rnaseq
+
+def startpos(genome): #finds start codon positions
+    rnaseq = transcription(genome)
+    n = len(rnaseq)
+    start = []
+    for i in range(n-2):
+        if rnaseq[i:i+3] == aaconvert['M'][0]:
+            start.append(i)
+    return start
+
+def stoppos(genome): #finds stop codon positions
+    rnaseq = transcription(genome)
+    stop   = []
+    n = len(genome)
+    for i in range(n-2):
+        for x in range(len(aaconvert["*"])):
+            if rnaseq[i:i+3] == aaconvert["*"][x]:
+                stop.append(i)
+    return stop
+
+#dictionary of codons for each amino acid
+aaconvert = {
+    "*": ["UGA", "UAA", "UAG"],
+    "M": ["AUG"],
+    "F": ["UUU", "UUC"],
+    "L": ["UUA", "UUG", "CUU", "CUC", "CUA", "CUG"],
+    "I": ["AUU", "AUC", "AUA"],
+    "V": ["GUU", "GUC", "GUA", "GUG"],
+    "S": ["UCU", "UCC", "UCA", "UCG", "AGU", "AGC"],
+    "P": ["CCU", "CCC", "CCA", "CCG"],
+    "T": ["ACU", "ACC", "ACA", "ACG"],
+    "A": ["GCU", "GCC", "GCA", "GCG"],
+    "Y": ["UAU", "UAC"],
+    "H": ["CAU", "CAC"],
+    "Q": ["CAA", "CAG"],
+    "N": ["AAU", "AAC"],
+    "K": ["AAA", "AAG"],
+    "D": ["GAU", "GAC"],
+    "E": ["GAA", "GAG"],
+    "C": ["UGU", "UGC"],
+    "W": ["UGG"],
+    "R": ["CGU", "CGC", "CGA", "CGG", "AGA", "AGG"],
+    "G": ["GGU", "GGC", "GGA", "GGG"]
+}
+
+text = "ATGGGGCCCAAATTTAAACCCTGA"
+
+print(translation(text))
