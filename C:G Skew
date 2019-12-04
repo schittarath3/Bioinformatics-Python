@@ -1,3 +1,4 @@
+#Compares the amount of C:G around a genome to determine origin of replication. Minimum value should be the approximate location of origin
 def SkewArray(Genome):
     skew = [0]
     n = len(Genome)
