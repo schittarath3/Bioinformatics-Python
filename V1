@@ -67,6 +67,6 @@ aaconvert = {
     "G": ["GGU", "GGC", "GGA", "GGG"]
 }
 
-text = "" #insert DNA sequence
+dnaseq = "" #insert DNA sequence
 
-print(translation(genome))
+print(translation(dnaseq))
