@@ -1,0 +1,14 @@
+def SkewArray(Genome):
+    skew = [0]
+    n = len(Genome)
+    skew[0] = 0
+    for i in range(0,n):
+        if Genome[i] == "A":
+            skew.append(skew[i])
+        elif Genome[i] == "T":
+            skew.append(skew[i])
+        elif Genome[i] == "G":
+            skew.append(skew[i]+1)
+        elif Genome[i] == "C":
+            skew.append(skew[i]-1)
+    return skew
