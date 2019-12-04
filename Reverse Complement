@@ -1,3 +1,4 @@
+#Creates a reverse complement of a DNA sequence
 def ReverseComplement(Pattern):
     reved = Reverse(Pattern)
     comped = Complement(reved)
