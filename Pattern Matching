@@ -1,3 +1,4 @@
+#Finds positions where pattern is found in text with at most d mismatches
 def ApproximatePatternMatching(Text, Pattern, d):
     positions = [] # initializing list of positions
     # your code here
