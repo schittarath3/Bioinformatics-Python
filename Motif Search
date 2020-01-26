@@ -1,0 +1,69 @@
+def Consensus(Motifs):
+    k = len(Motifs[0])
+    count = Count(Motifs)
+    consensus = ""
+    for j in range(k):
+        m = 0
+        frequentSymbol = ""
+        for symbol in "ACGT":
+            if count[symbol][j] > m:
+                m = count[symbol][j]
+                frequentSymbol = symbol
+        consensus += frequentSymbol
+    return consensus
+
+def Count(Motifs):
+    count = {} # initializing the count dictionary
+    k = len(Motifs[0])
+    for symbol in "ACGT":
+        count[symbol] = []
+        for j in range(k):
+             count[symbol].append(0)
+    t = len(Motifs)
+    for i in range(t):
+        for j in range(k):
+            symbol = Motifs[i][j]
+            count[symbol][j] += 1
+    return count
+
+def Score(Motifs):
+    # Insert code here
+    k = len(Motifs[0])
+    t = len(Motifs)
+    conseq = Consensus(Motifs)
+    mismatch = 0
+    for i in range(t):
+        for j in range(k):
+            if Motifs[i][j] != conseq[j]:
+                mismatch += 1
+    return mismatch
+            
+def Pr(Text, Profile):
+    # insert your code here
+    t = len(Text)
+    prob = 1
+    for i in range(t):
+        prob *= Profile[Text[i]][i]
+    return prob
+    
+def ProfileMostProbableKmer(text, k, profile):
+    n = len(text)
+    probsall = {}
+    for i in range(n-k+1):
+        probsall[text[i:i+k]] = Pr(text[i:i+k], profile)
+    return(max(probsall, key=probsall.get))
+
+def GreedyMotifSearch(Dna, k, t):
+    BestMotifs = []
+    for i in range(0, t):
+        BestMotifs.append(Dna[i][0:k])
+    n = len(Dna[0])
+    for x in range(n-k+1):
+        motifs = []
+        motifs.append(Dna[0][x:x+k])
+        for y in range(1, t):
+            profile = Count(motifs[0:y])
+            motifs.append(ProfileMostProbableKmer(Dna[y], k, profile))
+        if Score(motifs) < Score(BestMotifs):
+            BestMotifs = motifs
+    return BestMotifs
